@@ -41,7 +41,7 @@ function checkFileType(file, cb) {
   return cb("Error: Images, Word, Excel, and PDF files only !!!");
 }
 
-const  uploadFiles = async (req, res) => {
+const uploadFiles = async (req, res) => {
   try {
     // Gọi middleware multer ở đây để xử lý upload
     upload(req, res, async function (err) {

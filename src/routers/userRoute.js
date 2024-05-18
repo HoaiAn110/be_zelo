@@ -5,6 +5,8 @@ const { findUser, getUsers, findUserByEmail, sendFriendRequest,
     updateInfoUser } = require("../controllers/userController");
 const uploadFiles = require("../uploads/uploadFile");
 
+
+
 const router = express.Router();
 router.get("/", getUsers);
 router.get("/find/:userId", findUser);
@@ -16,5 +18,6 @@ router.get("/getFriends/:userId", getFriends);
 router.get("/getSendFriendRequest/:userId", getSendFriendRequest);
 router.delete("/deleteSendFriendRequest", deleteSendFriendRequest);
 router.put("/updateInfoUser/:userId", updateInfoUser);
+
 
 module.exports = router;

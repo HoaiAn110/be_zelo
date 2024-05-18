@@ -228,6 +228,9 @@ const updateInfoUser = async (req, res) => {
   }
 }
 
+
+
+
 module.exports = {
   findUser,
   getUsers,

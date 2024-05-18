@@ -232,11 +232,11 @@ const updatePasswordWhenLogin = async (req, res) => {
 
 const updateProfile = asyncHandler(async (req, res) => {
 	try {
-		const { fullname, email, dateOfBirth, gender } = req.body;
+		const { fullname, email, dateOfBirth, gender, photoUrl } = req.body;
 
 		console.log(fullname);
 		// const emailFind= req.emailFind;
-		const user = await UserModel.findOneAndUpdate({ email: email }, { fullname: fullname, dateOfBirth: dateOfBirth, gender: gender }, { new: true });
+		const user = await UserModel.findOneAndUpdate({ email: email }, { fullname: fullname, dateOfBirth: dateOfBirth, gender: gender, photoUrl: photoUrl }, { new: true });
 		console.log(user);
 		res.status(200).json({
 			message: "Cập nhật thông tin thành công",
@@ -248,13 +248,15 @@ const updateProfile = asyncHandler(async (req, res) => {
 				photoUrl: user.photoUrl,
 				dateOfBirth: user.dateOfBirth,
 				gender: user.gender,
+				photoUrl: user.photoUrl,
 				accesstoken: await getJsonWebToken(
 					email,
 					user._id,
 					user.fullname,
 					user.photoUrl,
 					user.dateOfBirth,
-					user.gender
+					user.gender,
+					user.photoUrl,
 				),
 			},
 		});

@@ -448,12 +448,12 @@ const transferOwnership = async (req, res, next) => {
 
 const leaveGroup = async (req, res, next) => {
     try {
-        const { groupId, userId } = req.params; // Lấy ID của nhóm và ID của người dùng từ request params
+        const { groupId, userId } = req.params;
 
-        // Tìm nhóm trong cơ sở dữ liệu
+
         const group = await Group.findById(groupId);
 
-        // Kiểm tra xem nhóm có tồn tại không
+
         if (!group) {
             return res.status(404).json({
                 success: false,
@@ -461,7 +461,7 @@ const leaveGroup = async (req, res, next) => {
             });
         }
 
-        // Kiểm tra xem người dùng có tồn tại trong nhóm không
+
         const index = group.members.indexOf(userId);
         if (index === -1) {
             return res.status(404).json({
@@ -480,7 +480,7 @@ const leaveGroup = async (req, res, next) => {
         }
         console.log(group.members.length);
         // Kiểm tra xem nhóm có ít hơn 3 thành viên không
-        if (group.members.length < 4) {
+        if (group.members.length < 2) {
             // Giải tán nhóm nếu ít hơn 3 thành viên
             await Group.findByIdAndDelete(groupId);
             // Cập nhật thông tin của các người dùng trong nhóm
