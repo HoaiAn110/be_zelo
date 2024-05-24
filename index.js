@@ -57,7 +57,7 @@ socketIo.on("connection", (socket) => {
     console.log("groupCreated", group); 
   });
 
-  socket.on("createMessageRoom", ({ userId, groupId }) => {
+  socket.on("createRoomGroup", ({ userId, groupId }) => {
     socket.join(`group-${groupId}`);
   });
 
@@ -88,6 +88,7 @@ socketIo.on("connection", (socket) => {
       text,
       createdAt: new Date().getTime(),
     });
+    console.log("sendMessageGroup", message);
   });
   // Xu ly su kien thu hoi tin nhan nhom
   socket.on("recallMessageGroup", ({ messageId, roomId }) => {
@@ -109,5 +110,16 @@ socketIo.on("connection", (socket) => {
      console.log(`Leader made: ${memberId} in group ${groupId}`);
    });
   
+   socket.on("groupAddMember", ({ groupId, members }) => {
+     members.forEach((memberId) => {
+       socket.to(memberId).emit("groupAddMember", groupId);
+       console.log("Emit groupAddMember to:", memberId);
+     });
+     socket.to(`group-${groupId}`).emit("newMemberAdded", groupId);
+   });
+
+     socket.on("dissolution", (groupId) => {
+       socket.to(`group-${groupId}`).emit("dissolution");
+     });
 
 });

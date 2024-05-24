@@ -1,8 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-//const dbUlr = `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.vlmwfvo.mongodb.net/chatApp?retryWrites=true&w=majority&appName=Cluster0`
-const dbUlr = `mongodb+srv://mongobasic:mongo123@cluster0.yenokrh.mongodb.net/appChat_Ver4`;
+const dbUlr = `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.vlmwfvo.mongodb.net/chatApp?retryWrites=true&w=majority&appName=Cluster0`
+// const dbUlr = `mongodb+srv://mongobasic:mongo123@cluster0.yenokrh.mongodb.net/appChat_Ver4`;
 const connectDB = async (app) => {
     try {
         const connection = await mongoose.connect(dbUlr);
